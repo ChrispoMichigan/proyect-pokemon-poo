@@ -10,6 +10,7 @@ from clases.data import Data
 from clases.utils import Utils
 from clases.enemigo import Enemigo
 from clases.combate import Combate
+from clases.pokemon import Pokemon
 
 class App:
     def __init__(self):
@@ -198,7 +199,7 @@ class App:
         # Resultado del combate
         self._mostrar_resultado_combate(pokemon_jugador, pokemon_enemigo, vida_jugador, vida_enemigo)
     
-    def _mostrar_estado_combate(self, pokemon_jugador, pokemon_enemigo, vida_jugador, vida_enemigo):
+    def _mostrar_estado_combate(self, pokemon_jugador : Pokemon, pokemon_enemigo : Enemigo, vida_jugador : int, vida_enemigo : int):
         """Muestra el estado actual del combate."""
         Utils.seleccionar_color_tipo("Fantasma")
         print("=" * 60)
@@ -221,7 +222,7 @@ class App:
         Utils.reset_color()
         print("-" * 60)
     
-    def _turno_jugador(self, pokemon_jugador, pokemon_enemigo):
+    def _turno_jugador(self, pokemon_jugador : Pokemon, pokemon_enemigo : Enemigo):
         """Maneja el turno del jugador."""
         Utils.seleccionar_color_tipo("Planta")
         print(f"\nTurno de {pokemon_jugador.nombre}!")
@@ -267,7 +268,7 @@ class App:
         
         return dano
     
-    def _turno_enemigo(self, pokemon_enemigo, pokemon_jugador):
+    def _turno_enemigo(self, pokemon_enemigo : Enemigo, pokemon_jugador : Pokemon):
         """Maneja el turno del enemigo (IA simple)."""
         Utils.seleccionar_color_tipo("Fuego")
         print(f"\nTurno de {pokemon_enemigo.nombre}!")
@@ -299,7 +300,7 @@ class App:
         
         return dano
     
-    def _mostrar_resultado_combate(self, pokemon_jugador, pokemon_enemigo, vida_jugador, vida_enemigo):
+    def _mostrar_resultado_combate(self, pokemon_jugador : Pokemon, pokemon_enemigo : Enemigo, vida_jugador : int, vida_enemigo : int):
         """Muestra el resultado final del combate."""
         os.system('cls')
         
@@ -311,7 +312,7 @@ class App:
             print("=" * 60)
             print(f"¡{pokemon_jugador.nombre} ha derrotado a {pokemon_enemigo.nombre}!")
             Utils.reset_color()
-            
+            pokemon_jugador.evolucionar()
             # Opción de atrapar
             self._opcion_atrapar_pokemon(pokemon_enemigo)
             

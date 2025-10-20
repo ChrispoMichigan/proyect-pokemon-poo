@@ -26,7 +26,32 @@ class Pokemon(PokemonBase, Entrenamiento):
             print("-" * 5 + "Descripción:" + "-" * 20)
             print("-" * 5 + habilidad.descripcion + "-" * 20)
             Utils.reset_color()
-    
+
+    def aumentar_nivel(self):
+        self.nivel += 100
+        if self.nivel >= 100:
+            self.evolucionar()
+        
+    def evolucionar(self):
+        Utils.seleccionar_color_tipo("Fuego")
+        print("-" * 10 + "Tu Pokemon acaba de evolucionar" + "-" * 10)
+        for pokemon in Data.cargar_evoluciones():
+            if pokemon["id_pokemon"] == self.id:
+                self.nombre = pokemon["nombre"]
+                self.tipo = pokemon["tipo"]
+                self.descripcion = pokemon["descripción"]
+                self.ataque = pokemon["ataque"]
+                self.defensa = pokemon["defensa"]
+                self.puntos_de_salud = pokemon["puntos_de_salud"]
+                self.poder_de_combate = pokemon["poder_de_combate"]
+                self.evolucion = pokemon["evolucion"]
+                self.nivel = random.randint(1, 6)
+                
+                Utils.reset_color()
+                self.detalles()
+                
+                return
+        
     def __crear_pokemon(self, id : int):
         for pokemon in Data.cargar_pokemons():
             if pokemon["id"] == id:
@@ -67,6 +92,8 @@ class Pokemon(PokemonBase, Entrenamiento):
 
     def detalles(self):
         Utils.seleccionar_color_tipo("Fuego")
+        print("----- HABLA ASÍ ---------------")
+        self.hablar()
         print("----- DETALLES DEL POKEMON ---------------")
         print(f"-----Nombre: {self.nombre} -----")
         print(f"-----Descripcion: {self.descripcion} -----")

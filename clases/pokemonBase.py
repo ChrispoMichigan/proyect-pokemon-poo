@@ -33,3 +33,7 @@ class PokemonBase(ABC):
     @abstractmethod
     def detalles(self):
         pass
+
+    @abstractmethod
+    def evolucionar(self):
+        pass
