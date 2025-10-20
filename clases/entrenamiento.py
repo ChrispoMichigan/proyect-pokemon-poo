@@ -21,10 +21,11 @@ class Entrenamiento(ABC):
         opcion = -1
         Utils.seleccionar_color_tipo("Fantasma")
     
-        while not opcion in [1, 2, 3]:
+        while not opcion in [1, 2, 3, 4]:
             print("-" * 10 + "Opción[1]:Aumentar ataque" + "-" * 10 )
             print("-" * 10 + "Opción[2]:Aumentar defensa" + "-" * 10 )
             print("-" * 10 + "Opción[3]:Aumentar salud" + "-" * 10 )
+            print("-" * 10 + "Opción[4]:Entrenamiento intensivo (actualiza todo)" + "-" * 10 )
             opcion = input('Inserta el número a escoger:\t')
             try:
                 opcion = int(opcion)
@@ -39,6 +40,9 @@ class Entrenamiento(ABC):
 
         if opcion == 3:
             pokemon.subir_puntos_de_salud()
+
+        if opcion == 3:
+            pokemon.actualizar()
 
         os.system('pause')
         os.system('cls')
