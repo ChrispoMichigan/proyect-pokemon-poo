@@ -6,6 +6,7 @@ import os
 #! Clases
 from clases.jugador import Jugador
 from clases.data import Data
+from clases.utils import Utils
 
 class App:
     def __init__(self):
@@ -18,7 +19,7 @@ class App:
         print(Fore.YELLOW + Back.RED + " " * 10 + "Bienvenido Al Juego" + " " * 11 )
         for i in range(3):
             print(Back.CYAN + " " * 40 + "\n", end="")
-        print(Style.RESET_ALL)
+        Utils.reset_color
 
         os.system('pause')
         os.system('cls')
@@ -31,7 +32,7 @@ class App:
         for i in range(3):
             print(Back.CYAN + " " * 40 + "\n", end="")
         name = input(Fore.YELLOW + Back.RED + 'Tú nombre aquí:\t')
-        print(Style.RESET_ALL)
+        Utils.reset_color()
 
         self.jugador.nombre = name
 
@@ -46,46 +47,18 @@ class App:
         print(" " * 2 + "Selecciona tu inicial a continuación" + " " * 2)
         for i in range(3):
             print(Back.CYAN + " " * 40 + "\n", end="")
-        print(Style.RESET_ALL)
+        Utils.reset_color()
 
         os.system('pause')
         os.system('cls')
 
         self.mostrar_iniciales()
 
-    def seleccionar_color_tipo(self, tipo : str):
-        print(Style.BRIGHT, end="")
-
-        if tipo == "Fuego":
-            print(Back.RED , end="")
-            print(Fore.BLACK, end="")
-            return
-
-        if tipo == "Eléctrico":
-            print(Back.YELLOW , end="")
-            print(Fore.BLACK, end="")
-            return
-
-        if tipo == "Planta":
-            print(Back.GREEN , end="")
-            print(Fore.BLACK, end="")
-            return
-
-        if tipo == "Agua":
-            print(Back.BLUE , end="")
-            print(Fore.BLACK, end="")
-            return
-        
-        if tipo == "Fantasma":
-            print(Back.WHITE , end="")
-            print(Fore.BLACK, end="")
-            return
-
     def mostrar_iniciales(self):
         
         for pokemon in Data.cargar_iniciales():
             
-            self.seleccionar_color_tipo(pokemon["tipo"][0])
+            Utils.seleccionar_color_tipo(pokemon["tipo"][0])
 
             print("-" * 80)
             print("-" * 25 + pokemon["nombre"] + "-" * 5 + "Seleccione con -> [" + str(pokemon["id"]) + "]" + "-" * 20)
@@ -95,13 +68,13 @@ class App:
             print("💥  PD: " + str(pokemon["poder_de_combate"]) + " | " + "-" * 15)
             print(pokemon["descripción"])
             print("-" * 80)
-            print(Style.RESET_ALL)
+            Utils.reset_color()
 
-        self.seleccionar_color_tipo("Fantasma")
+        Utils.seleccionar_color_tipo("Fantasma")
         print("-" * 80)
         print("-" * 20 + "Selecciona tu inicial poniendo su número" + "-" * 20)
         print("-" * 80)
-        print(Style.RESET_ALL)
+        Utils.reset_color()
         
         self.seleccionar_inicial()
         
@@ -109,7 +82,7 @@ class App:
     def seleccionar_inicial(self):
         opcion = 0
         while opcion <= 0 or opcion >= 5:
-            self.seleccionar_color_tipo("Fantasma")
+            Utils.seleccionar_color_tipo("Fantasma")
             opcion = input('Inserta el número a escoger:\t')
             try:
                 opcion = int(opcion)
@@ -118,13 +91,39 @@ class App:
                 opcion = 0
             
         print("Opción seleccionada: " + str(opcion))
-        self.jugador.agregar_pokemon(opcion)
-        print(Style.RESET_ALL)
-
+        Utils.reset_color()
+        
         os.system('pause')
         os.system('cls')
 
+        self.jugador.agregar_pokemon(opcion)
+        self.presentar_habilidades_pokemon()
+        self.menu_principal()
 
+    def presentar_habilidades_pokemon(self):
+        self.jugador.mostrar_habilidades_pokemon(0)
+
+    def menu_principal(self):
+        while True:
+            opcion = -1
+            Utils.seleccionar_color_tipo("Fantasma")
+        
+            while not opcion in [1, 2]:
+                print("-" * 10 + "Opción[1]:Mirar mis pokemons" + "-" * 10 )
+                print("-" * 10 + "Opción[2]:Mirar estado de mis pokemons" + "-" * 10 )
+                opcion = input('Inserta el número a escoger:\t')
+                try:
+                    opcion = int(opcion)
+                except Exception:
+                    print("Seleccione una opción valida")
+                
+
+            if opcion == 1:
+                for i in range(len(self.jugador.pokemons)):
+                    self.jugador.mostrar_habilidades_pokemon(i)
+            if opcion == 2:
+                for i in range(len(self.jugador.pokemons)):
+                    self.jugador.mostrar_estado_pokemon(i)
 
 if __name__ == "__main__":
     game = App()
