@@ -85,7 +85,7 @@ class App:
 
     def seleccionar_inicial(self):
         opcion = 0
-        while opcion <= 0 or opcion >= 5:
+        while opcion <= 0 or opcion >= 6:
             Utils.seleccionar_color_tipo("Fantasma")
             opcion = input('Inserta el número a escoger:\t')
             try:
@@ -112,7 +112,7 @@ class App:
             opcion = -1
             Utils.seleccionar_color_tipo("Fantasma")
         
-            while not opcion in [1, 2, 3, 4]:
+            while not opcion in [1, 2, 3, 4, 5 ]:
                 print("-" * 10 + "Opción[1]:Mirar mis pokemons" + "-" * 10 )
                 print("-" * 10 + "Opción[2]:Mirar estado de mis pokemons" + "-" * 10 )
                 print("-" * 10 + "Opción[3]:Enfrentar Pokemon" + "-" * 10 )

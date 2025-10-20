@@ -358,6 +358,46 @@
         "precisión": 100,
         "puntos_de_poder": 5,
         "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 7,
+        "nombre": "Rasguño",
+        "descripción": "Causa daño",
+        "tipo": "Normal",
+        "potencia": 80,
+        "precisión": 95,
+        "puntos_de_poder": 25,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 7,
+        "nombre": "Ataque veloz",
+        "descripción": "Debilita al enemigo .",
+        "tipo": "Normal",
+        "potencia": 90,
+        "precisión": 100,
+        "puntos_de_poder": 40,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 7,
+        "nombre": "Golpe de puño",
+        "descripción": "Ataque que siempre golpea primero.",
+        "tipo": "Siniestro",
+        "potencia": 70,
+        "precisión": 85,
+        "puntos_de_poder": 30,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 7,
+        "nombre": "Mordisco",
+        "descripción": "Ataca primero si el enemigo va a atacar.",
+        "tipo": "Siniestro",
+        "potencia": 80,
+        "precisión": 100,
+        "puntos_de_poder": 5,
+        "blanco": "enemigo"
     }
 
 ]

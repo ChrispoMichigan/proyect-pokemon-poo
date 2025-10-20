@@ -64,6 +64,17 @@
         "puntos_de_salud": 103,
         "poder_de_combate": 910,
         "evolucion": 1
+    },
+    {
+        "id": 7,
+        "nombre":"Gengar",
+        "tipo": ["Veneno"],
+        "descripción": "Con puas en su espalda, brillantes ojos rojos y una sonrisa enorme que intimida",
+        "ataque": 96,
+        "defensa": 65,
+        "puntos_de_salud": 150,
+        "poder_de_combate": 990,
+        "evolucion": 1
     }
 
 ]
