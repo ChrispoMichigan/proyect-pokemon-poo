@@ -22,15 +22,6 @@ class PokemonBase(ABC):
     def imprimir(self):
         print("Desde Pokemon base")
 
-    def subirAtaque(self):
-        pass
-
-    def subirDefensa(self):
-        pass
-
-    def subirVida(self):
-        pass
-
     @abstractmethod
     def hablar(self):
         pass

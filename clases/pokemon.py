@@ -121,7 +121,6 @@ if __name__ == "__main__":
     pok.hablar()
     pok.entrenar()
     pok.subirAtaque()
-    pok.subirDefensa()
     pok.subirVida()
     pok.actualizar()
     pok.detalles()
