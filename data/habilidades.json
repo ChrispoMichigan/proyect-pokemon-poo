@@ -12,19 +12,19 @@
     {
         "id_pokemon": 1,
         "nombre": "Onda Trueno",
-        "descripción": "Paraliza al enemigo sin causar daño.",
+        "descripción": "Paraliza al enemigo.",
         "tipo": "Eléctrico",
-        "potencia": 0,
+        "potencia": 55,
         "precisión": 90,
         "puntos_de_poder": 20,
         "blanco": "enemigo"
     },
     {
         "id_pokemon": 1,
-        "nombre": "Doble Equipo",
-        "descripción": "Aumenta la evasión del usuario.",
-        "tipo": "Normal",
-        "potencia": 0,
+        "nombre": "Thunder Shock",
+        "descripción": "Eléctrocuta al enemigo desde el suelo.",
+        "tipo": "Eléctrico",
+        "potencia": 45,
         "precisión": 100,
         "puntos_de_poder": 15,
         "blanco": "usuario"
@@ -42,9 +42,9 @@
     {
         "id_pokemon": 1,
         "nombre": "Gruñido",
-        "descripción": "Reduce el ataque del enemigo.",
+        "descripción": "Aturde al enemigo.",
         "tipo": "Normal",
-        "potencia": 0,
+        "potencia": 30,
         "precisión": 100,
         "puntos_de_poder": 40,
         "blanco": "enemigo"
@@ -74,7 +74,7 @@
         "nombre": "Drenadoras",
         "descripción": "Absorbe PS del enemigo cada turno.",
         "tipo": "Planta",
-        "potencia": 0,
+        "potencia": 30,
         "precisión": 90,
         "puntos_de_poder": 10,
         "blanco": "enemigo"
@@ -84,7 +84,7 @@
         "nombre": "Paralizador",
         "descripción": "Puede paralizar al enemigo.",
         "tipo": "Planta",
-        "potencia": 0,
+        "potencia": 45,
         "precisión": 75,
         "puntos_de_poder": 30,
         "blanco": "enemigo"
@@ -94,7 +94,7 @@
         "nombre": "Polvo Veneno",
         "descripción": "Envenena al enemigo.",
         "tipo": "Veneno",
-        "potencia": 0,
+        "potencia": 30,
         "precisión": 75,
         "puntos_de_poder": 35,
         "blanco": "enemigo"
@@ -104,7 +104,7 @@
         "nombre": "Síntesis",
         "descripción": "Recupera PS del usuario.",
         "tipo": "Planta",
-        "potencia": 0,
+        "potencia": 50,
         "precisión": 100,
         "puntos_de_poder": 5,
         "blanco": "usuario"
@@ -134,7 +134,7 @@
         "nombre": "Gruñido",
         "descripción": "Reduce el ataque del enemigo.",
         "tipo": "Normal",
-        "potencia": 0,
+        "potencia": 30,
         "precisión": 100,
         "puntos_de_poder": 40,
         "blanco": "enemigo"
@@ -144,7 +144,7 @@
         "nombre": "Pantalla de Humo",
         "descripción": "Reduce la precisión del enemigo.",
         "tipo": "Normal",
-        "potencia": 0,
+        "potencia": 60,
         "precisión": 100,
         "puntos_de_poder": 20,
         "blanco": "enemigo"
@@ -174,7 +174,7 @@
         "nombre": "Danza Espada",
         "descripción": "Aumenta el ataque del usuario.",
         "tipo": "Normal",
-        "potencia": 0,
+        "potencia": 50,
         "precisión": 100,
         "puntos_de_poder": 20,
         "blanco": "usuario"
@@ -184,7 +184,7 @@
         "nombre": "Descanso",
         "descripción": "El usuario duerme y recupera todos sus PS.",
         "tipo": "Psíquico",
-        "potencia": 0,
+        "potencia": 40,
         "precisión": 100,
         "puntos_de_poder": 10,
         "blanco": "usuario"
@@ -204,7 +204,7 @@
         "nombre": "Protección",
         "descripción": "Evita todo daño durante un turno.",
         "tipo": "Normal",
-        "potencia": 0,
+        "potencia": 35,
         "precisión": 100,
         "puntos_de_poder": 10,
         "blanco": "usuario"
@@ -234,7 +234,7 @@
         "nombre": "Caparazón",
         "descripción": "Aumenta la defensa del usuario considerablemente.",
         "tipo": "Agua",
-        "potencia": 0,
+        "potencia": 50,
         "precisión": 100,
         "puntos_de_poder": 20,
         "blanco": "usuario"
@@ -244,7 +244,7 @@
         "nombre": "Canto",
         "descripción": "Hace dormir al enemigo.",
         "tipo": "Normal",
-        "potencia": 0,
+        "potencia": 60,
         "precisión": 55,
         "puntos_de_poder": 15,
         "blanco": "enemigo"
@@ -254,7 +254,7 @@
         "nombre": "Rizo Defensa",
         "descripción": "Aumenta la defensa del usuario.",
         "tipo": "Normal",
-        "potencia": 0,
+        "potencia": 10,
         "precisión": 100,
         "puntos_de_poder": 40,
         "blanco": "usuario"
@@ -274,7 +274,7 @@
         "nombre": "Pulso Cura",
         "descripción": "Recupera PS del usuario o aliado.",
         "tipo": "Hada",
-        "potencia": 0,
+        "potencia": 10,
         "precisión": 100,
         "puntos_de_poder": 10,
         "blanco": "usuario"
@@ -284,7 +284,7 @@
         "nombre": "Rizo Dulce",
         "descripción": "Reduce la evasión del enemigo.",
         "tipo": "Hada",
-        "potencia": 0,
+        "potencia": 10,
         "precisión": 100,
         "puntos_de_poder": 20,
         "blanco": "enemigo"
@@ -334,7 +334,7 @@
         "nombre": "Gruñido",
         "descripción": "Reduce el ataque del enemigo.",
         "tipo": "Normal",
-        "potencia": 0,
+        "potencia": 20,
         "precisión": 100,
         "puntos_de_poder": 40,
         "blanco": "enemigo"

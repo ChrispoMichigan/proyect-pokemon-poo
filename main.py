@@ -2,11 +2,14 @@
 #! Librerias
 from colorama import Fore, Back, Style # https://pypi.org/project/colorama/
 import os
+import random
 
 #! Clases
 from clases.jugador import Jugador
 from clases.data import Data
 from clases.utils import Utils
+from clases.enemigo import Enemigo
+from clases.combate import Combate
 
 class App:
     def __init__(self):
@@ -111,7 +114,7 @@ class App:
             while not opcion in [1, 2, 3]:
                 print("-" * 10 + "Opción[1]:Mirar mis pokemons" + "-" * 10 )
                 print("-" * 10 + "Opción[2]:Mirar estado de mis pokemons" + "-" * 10 )
-                print("-" * 10 + "Opción[3]:Entrenar Pokemon" + "-" * 10 )
+                print("-" * 10 + "Opción[3]:Enfrentar Pokemon" + "-" * 10 )
                 opcion = input('Inserta el número a escoger:\t')
                 try:
                     opcion = int(opcion)
@@ -127,7 +130,231 @@ class App:
                     self.jugador.mostrar_estado_pokemon(i)
             if opcion == 3:
                 index = self.jugador.seleccionar_pokemon()
-                self.jugador.mostrar_estado_pokemon(index)
+                aleatorio = random.randint(1, len(Data.cargar_pokemons()) - 1)
+                enemigo = Enemigo(aleatorio)
+                self.iniciar_combate(index, enemigo)
+
+    def iniciar_combate(self, index_pokemon_jugador: int, enemigo : Enemigo):
+        """
+        Sistema de combate por turnos entre el pokémon del jugador y un enemigo.
+        """
+        os.system('cls')
+        
+        # Obtener el pokémon del jugador
+        pokemon_jugador = self.jugador.pokemons[index_pokemon_jugador]
+        pokemon_enemigo = enemigo
+        
+        # Variables de combate
+        vida_jugador = pokemon_jugador.puntos_de_salud
+        vida_enemigo = pokemon_enemigo.puntos_de_salud
+        turno_jugador = True
+        
+        Utils.seleccionar_color_tipo("Fantasma")
+        print("=" * 60)
+        print(" " * 20 + "¡COMBATE POKÉMON!" + " " * 20)
+        print("=" * 60)
+        Utils.reset_color()
+        
+        # Mostrar detalles iniciales
+        print("\nTU POKÉMON:")
+        pokemon_jugador.detalles()
+        
+        print("\nPOKÉMON ENEMIGO:")
+        pokemon_enemigo.detalles()
+        
+        os.system('pause')
+        
+        # Bucle principal del combate
+        while vida_jugador > 0 and vida_enemigo > 0:
+            os.system('cls')
+            
+            # Mostrar estado actual
+            self._mostrar_estado_combate(pokemon_jugador, pokemon_enemigo, vida_jugador, vida_enemigo)
+            
+            if turno_jugador:
+                # Turno del jugador
+                dano = self._turno_jugador(pokemon_jugador, pokemon_enemigo)
+                vida_enemigo = max(0, vida_enemigo - dano)
+                
+                if vida_enemigo <= 0:
+                    break
+                    
+            else:
+                # Turno del enemigo
+                dano = self._turno_enemigo(pokemon_enemigo, pokemon_jugador)
+                vida_jugador = max(0, vida_jugador - dano)
+                
+                if vida_jugador <= 0:
+                    break
+            
+            # Cambiar turno
+            turno_jugador = not turno_jugador
+            os.system('pause')
+        
+        # Resultado del combate
+        self._mostrar_resultado_combate(pokemon_jugador, pokemon_enemigo, vida_jugador, vida_enemigo)
+    
+    def _mostrar_estado_combate(self, pokemon_jugador, pokemon_enemigo, vida_jugador, vida_enemigo):
+        """Muestra el estado actual del combate."""
+        Utils.seleccionar_color_tipo("Fantasma")
+        print("=" * 60)
+        print(" " * 20 + "ESTADO DEL COMBATE" + " " * 20)
+        print("=" * 60)
+        Utils.reset_color()
+        
+        # Estado del jugador
+        Utils.seleccionar_color_tipo("Planta")
+        print(f"{pokemon_jugador.nombre} (Nivel {pokemon_jugador.nivel})")
+        print(f"Vida: {vida_jugador}/{pokemon_jugador.puntos_de_salud}")
+        Utils.reset_color()
+        
+        print(" VS ")
+        
+        # Estado del enemigo
+        Utils.seleccionar_color_tipo("Fuego")
+        print(f"{pokemon_enemigo.nombre} (Nivel {pokemon_enemigo.nivel})")
+        print(f"Vida: {vida_enemigo}/{pokemon_enemigo.puntos_de_salud}")
+        Utils.reset_color()
+        print("-" * 60)
+    
+    def _turno_jugador(self, pokemon_jugador, pokemon_enemigo):
+        """Maneja el turno del jugador."""
+        Utils.seleccionar_color_tipo("Planta")
+        print(f"\nTurno de {pokemon_jugador.nombre}!")
+        Utils.reset_color()
+        
+        # Mostrar habilidades disponibles
+        print("\nSelecciona un ataque:")
+        for i, habilidad in enumerate(pokemon_jugador.habilidades):
+            Utils.seleccionar_color_tipo(habilidad.tipo)
+            print(f"{i + 1}. {habilidad.nombre} (Potencia: {habilidad.potencia}, Precisión: {habilidad.precision}%, Tipo: {habilidad.tipo})")
+            Utils.reset_color()
+        
+        # Seleccionar habilidad
+        while True:
+            try:
+                opcion = int(input("\nElige tu ataque (número): ")) - 1
+                if 0 <= opcion < len(pokemon_jugador.habilidades):
+                    habilidad_seleccionada = pokemon_jugador.habilidades[opcion]
+                    break
+                else:
+                    print("Opción inválida. Intenta de nuevo.")
+            except ValueError:
+                print("Por favor, ingresa un número válido.")
+        
+        # Calcular daño
+        dano = Combate.calcular_dano(
+            tipo_usuario=pokemon_jugador.tipo,
+            nivel_usuario=pokemon_jugador.nivel,
+            tipo_enemigo=pokemon_enemigo.tipo,
+            nivel_enemigo=pokemon_enemigo.nivel,
+            ataque_usuario=pokemon_jugador.ataque,
+            descripcion_ataque=habilidad_seleccionada.nombre,
+            defensa_enemigo=pokemon_enemigo.defensa,
+            potencia=habilidad_seleccionada.potencia,
+            precision=habilidad_seleccionada.precision,
+            tipo_ataque=habilidad_seleccionada.tipo
+        )
+        
+        if dano > 0:
+            Utils.seleccionar_color_tipo("Fuego")
+            print(f"\n{pokemon_enemigo.nombre} recibe {dano} puntos de daño!")
+            Utils.reset_color()
+        
+        return dano
+    
+    def _turno_enemigo(self, pokemon_enemigo, pokemon_jugador):
+        """Maneja el turno del enemigo (IA simple)."""
+        Utils.seleccionar_color_tipo("Fuego")
+        print(f"\nTurno de {pokemon_enemigo.nombre}!")
+        Utils.reset_color()
+        
+        # Seleccionar habilidad aleatoria
+        habilidad_seleccionada = random.choice(pokemon_enemigo.habilidades)
+        
+        print(f"\n{pokemon_enemigo.nombre} usa {habilidad_seleccionada.nombre}!")
+        
+        # Calcular daño
+        dano = Combate.calcular_dano(
+            tipo_usuario=pokemon_enemigo.tipo,
+            nivel_usuario=pokemon_enemigo.nivel,
+            tipo_enemigo=pokemon_jugador.tipo,
+            nivel_enemigo=pokemon_jugador.nivel,
+            ataque_usuario=pokemon_enemigo.ataque,
+            descripcion_ataque=habilidad_seleccionada.nombre,
+            defensa_enemigo=pokemon_jugador.defensa,
+            potencia=habilidad_seleccionada.potencia,
+            precision=habilidad_seleccionada.precision,
+            tipo_ataque=habilidad_seleccionada.tipo
+        )
+        
+        if dano > 0:
+            Utils.seleccionar_color_tipo("Fuego")
+            print(f"\n{pokemon_jugador.nombre} recibe {dano} puntos de daño!")
+            Utils.reset_color()
+        
+        return dano
+    
+    def _mostrar_resultado_combate(self, pokemon_jugador, pokemon_enemigo, vida_jugador, vida_enemigo):
+        """Muestra el resultado final del combate."""
+        os.system('cls')
+        
+        if vida_enemigo <= 0:
+            # Victoria del jugador
+            Utils.seleccionar_color_tipo("Planta")
+            print("=" * 60)
+            print(" " * 20 + "¡VICTORIA!" + " " * 25)
+            print("=" * 60)
+            print(f"¡{pokemon_jugador.nombre} ha derrotado a {pokemon_enemigo.nombre}!")
+            Utils.reset_color()
+            
+            # Opción de atrapar
+            self._opcion_atrapar_pokemon(pokemon_enemigo)
+            
+        else:
+            # Derrota del jugador
+            Utils.seleccionar_color_tipo("Fuego")
+            print("=" * 60)
+            print(" " * 20 + "DERROTA..." + " " * 23)
+            print("=" * 60)
+            print(f"{pokemon_jugador.nombre} ha sido derrotado por {pokemon_enemigo.nombre}...")
+            Utils.reset_color()
+        
+        os.system('pause')
+    
+    def _opcion_atrapar_pokemon(self, pokemon_enemigo):
+        """Ofrece la opción de atrapar al Pokémon derrotado."""
+        Utils.seleccionar_color_tipo("Fantasma")
+        print(f"\n¿Quieres intentar atrapar a {pokemon_enemigo.nombre}?")
+        print("1. Sí, intentar atraparlo")
+        print("2. No, continuar")
+        Utils.reset_color()
+        
+        while True:
+            try:
+                opcion = int(input("\nElige una opción: "))
+                if opcion == 1:
+                    # 50% de probabilidad de éxito
+                    if random.random() < 0.5:
+                        pokemon_enemigo.atrapado = True
+                        self.jugador.pokemons.append(pokemon_enemigo)
+                        
+                        Utils.seleccionar_color_tipo("Planta")
+                        print(f"\n¡Has atrapado a {pokemon_enemigo.nombre}!")
+                        print(f"¡{pokemon_enemigo.nombre} se ha unido a tu equipo!")
+                        Utils.reset_color()
+                    else:
+                        Utils.seleccionar_color_tipo("Fuego")
+                        print(f"\n¡{pokemon_enemigo.nombre} ha escapado!")
+                        Utils.reset_color()
+                    break
+                elif opcion == 2:
+                    print(f"\n{pokemon_enemigo.nombre} se aleja...")
+                    break
+                else:
+                    print("Opción inválida. Intenta de nuevo.")
+            except ValueError:
+                print("Por favor, ingresa un número válido.")
 
 if __name__ == "__main__":
     game = App()
