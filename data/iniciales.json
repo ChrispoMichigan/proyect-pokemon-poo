@@ -1,0 +1,46 @@
+[
+    {
+        "id": 1,
+        "nombre": "Pikachu",
+        "tipo": ["Eléctrico"],
+        "descripción": "Mantiene su cola en alto para vigilar. Si das un tirón a su cola, querrá morderte.",
+        "ataque": 112,
+        "defensa": 96,
+        "puntos_de_salud": 100,
+        "poder_de_combate": 949,
+        "evolucion": 1
+    },
+    {
+        "id": 2,
+        "nombre": "Bulbasaur",
+        "tipo": ["Planta", "Veneno"],
+        "descripción": "Este Pokémon nace con una semilla en el lomo que crece con él.",
+        "ataque": 118,
+        "defensa": 111,
+        "puntos_de_salud": 105,
+        "poder_de_combate": 981,
+        "evolucion": 1
+    },
+    {
+        "id": 3,
+        "nombre": "Charmander",
+        "tipo": ["Fuego"],
+        "descripción": "La llama de su cola indica su estado de salud. Si está débil, la llama se apaga.",
+        "ataque": 116,
+        "defensa": 93,
+        "puntos_de_salud": 102,
+        "poder_de_combate": 965,
+        "evolucion": 1
+    },
+    {
+        "id": 4,
+        "nombre": "Squirtle",
+        "tipo": ["Agua"],
+        "descripción": "Cuando se siente amenazado, se esconde dentro de su caparazón y lanza chorros de agua.",
+        "ataque": 94,
+        "defensa": 121,
+        "puntos_de_salud": 108,
+        "poder_de_combate": 955,
+        "evolucion": 1
+    }
+]

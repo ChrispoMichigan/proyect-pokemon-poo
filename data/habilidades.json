@@ -1,0 +1,363 @@
+[
+    {
+        "id_pokemon": 1,
+        "nombre": "Impactrueno",
+        "descripción": "Un rayo eléctrico que puede paralizar al enemigo.",
+        "tipo": "Eléctrico",
+        "potencia": 40,
+        "precisión": 100,
+        "puntos_de_poder": 30,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 1,
+        "nombre": "Onda Trueno",
+        "descripción": "Paraliza al enemigo sin causar daño.",
+        "tipo": "Eléctrico",
+        "potencia": 0,
+        "precisión": 90,
+        "puntos_de_poder": 20,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 1,
+        "nombre": "Doble Equipo",
+        "descripción": "Aumenta la evasión del usuario.",
+        "tipo": "Normal",
+        "potencia": 0,
+        "precisión": 100,
+        "puntos_de_poder": 15,
+        "blanco": "usuario"
+    },
+    {
+        "id_pokemon": 1,
+        "nombre": "Chispa",
+        "descripción": "Ataque eléctrico con posibilidad de paralizar.",
+        "tipo": "Eléctrico",
+        "potencia": 65,
+        "precisión": 100,
+        "puntos_de_poder": 20,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 1,
+        "nombre": "Gruñido",
+        "descripción": "Reduce el ataque del enemigo.",
+        "tipo": "Normal",
+        "potencia": 0,
+        "precisión": 100,
+        "puntos_de_poder": 40,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 1,
+        "nombre": "Placaje",
+        "descripción": "Ataque físico básico.",
+        "tipo": "Normal",
+        "potencia": 50,
+        "precisión": 95,
+        "puntos_de_poder": 35,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 2,
+        "nombre": "Latigazo",
+        "descripción": "Golpea al enemigo con látigos de plantas.",
+        "tipo": "Planta",
+        "potencia": 45,
+        "precisión": 100,
+        "puntos_de_poder": 25,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 2,
+        "nombre": "Drenadoras",
+        "descripción": "Absorbe PS del enemigo cada turno.",
+        "tipo": "Planta",
+        "potencia": 0,
+        "precisión": 90,
+        "puntos_de_poder": 10,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 2,
+        "nombre": "Paralizador",
+        "descripción": "Puede paralizar al enemigo.",
+        "tipo": "Planta",
+        "potencia": 0,
+        "precisión": 75,
+        "puntos_de_poder": 30,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 2,
+        "nombre": "Polvo Veneno",
+        "descripción": "Envenena al enemigo.",
+        "tipo": "Veneno",
+        "potencia": 0,
+        "precisión": 75,
+        "puntos_de_poder": 35,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 2,
+        "nombre": "Síntesis",
+        "descripción": "Recupera PS del usuario.",
+        "tipo": "Planta",
+        "potencia": 0,
+        "precisión": 100,
+        "puntos_de_poder": 5,
+        "blanco": "usuario"
+    },
+    {
+        "id_pokemon": 2,
+        "nombre": "Bomba Lodo",
+        "descripción": "Ataque de veneno con posibilidad de envenenar.",
+        "tipo": "Veneno",
+        "potencia": 90,
+        "precisión": 100,
+        "puntos_de_poder": 10,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 3,
+        "nombre": "Ascuas",
+        "descripción": "Ataque de fuego con posibilidad de quemar.",
+        "tipo": "Fuego",
+        "potencia": 40,
+        "precisión": 100,
+        "puntos_de_poder": 25,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 3,
+        "nombre": "Gruñido",
+        "descripción": "Reduce el ataque del enemigo.",
+        "tipo": "Normal",
+        "potencia": 0,
+        "precisión": 100,
+        "puntos_de_poder": 40,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 3,
+        "nombre": "Pantalla de Humo",
+        "descripción": "Reduce la precisión del enemigo.",
+        "tipo": "Normal",
+        "potencia": 0,
+        "precisión": 100,
+        "puntos_de_poder": 20,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 3,
+        "nombre": "Garra Metal",
+        "descripción": "Ataque físico con posibilidad de subir ataque.",
+        "tipo": "Acero",
+        "potencia": 50,
+        "precisión": 95,
+        "puntos_de_poder": 35,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 3,
+        "nombre": "Lanzallamas",
+        "descripción": "Ataque de fuego potente con posibilidad de quemar.",
+        "tipo": "Fuego",
+        "potencia": 90,
+        "precisión": 100,
+        "puntos_de_poder": 15,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 3,
+        "nombre": "Danza Espada",
+        "descripción": "Aumenta el ataque del usuario.",
+        "tipo": "Normal",
+        "potencia": 0,
+        "precisión": 100,
+        "puntos_de_poder": 20,
+        "blanco": "usuario"
+    },
+    {
+        "id_pokemon": 4,
+        "nombre": "Descanso",
+        "descripción": "El usuario duerme y recupera todos sus PS.",
+        "tipo": "Psíquico",
+        "potencia": 0,
+        "precisión": 100,
+        "puntos_de_poder": 10,
+        "blanco": "usuario"
+    },
+    {
+        "id_pokemon": 4,
+        "nombre": "Rayo Burbuja",
+        "descripción": "Ataque de agua que puede reducir la velocidad del enemigo.",
+        "tipo": "Agua",
+        "potencia": 65,
+        "precisión": 100,
+        "puntos_de_poder": 20,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 4,
+        "nombre": "Protección",
+        "descripción": "Evita todo daño durante un turno.",
+        "tipo": "Normal",
+        "potencia": 0,
+        "precisión": 100,
+        "puntos_de_poder": 10,
+        "blanco": "usuario"
+    },
+    {
+        "id_pokemon": 4,
+        "nombre": "Surf",
+        "descripción": "Poderoso ataque de agua que golpea a todos los enemigos.",
+        "tipo": "Agua",
+        "potencia": 90,
+        "precisión": 100,
+        "puntos_de_poder": 15,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 4,
+        "nombre": "Giro Rápido",
+        "descripción": "Elimina efectos como atrapado o púas.",
+        "tipo": "Normal",
+        "potencia": 50,
+        "precisión": 100,
+        "puntos_de_poder": 40,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 4,
+        "nombre": "Caparazón",
+        "descripción": "Aumenta la defensa del usuario considerablemente.",
+        "tipo": "Agua",
+        "potencia": 0,
+        "precisión": 100,
+        "puntos_de_poder": 20,
+        "blanco": "usuario"
+    },
+    {
+        "id_pokemon": 5,
+        "nombre": "Canto",
+        "descripción": "Hace dormir al enemigo.",
+        "tipo": "Normal",
+        "potencia": 0,
+        "precisión": 55,
+        "puntos_de_poder": 15,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 5,
+        "nombre": "Rizo Defensa",
+        "descripción": "Aumenta la defensa del usuario.",
+        "tipo": "Normal",
+        "potencia": 0,
+        "precisión": 100,
+        "puntos_de_poder": 40,
+        "blanco": "usuario"
+    },
+    {
+        "id_pokemon": 5,
+        "nombre": "Desenrollar",
+        "descripción": "Ataque físico que se vuelve más fuerte cada turno.",
+        "tipo": "Roca",
+        "potencia": 30,
+        "precisión": 90,
+        "puntos_de_poder": 20,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 5,
+        "nombre": "Pulso Cura",
+        "descripción": "Recupera PS del usuario o aliado.",
+        "tipo": "Hada",
+        "potencia": 0,
+        "precisión": 100,
+        "puntos_de_poder": 10,
+        "blanco": "usuario"
+    },
+    {
+        "id_pokemon": 5,
+        "nombre": "Rizo Dulce",
+        "descripción": "Reduce la evasión del enemigo.",
+        "tipo": "Hada",
+        "potencia": 0,
+        "precisión": 100,
+        "puntos_de_poder": 20,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 5,
+        "nombre": "Rayo",
+        "descripción": "Ataque especial con posibilidad de paralizar.",
+        "tipo": "Eléctrico",
+        "potencia": 90,
+        "precisión": 100,
+        "puntos_de_poder": 15,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 6,
+        "nombre": "Arañazo",
+        "descripción": "Ataque físico básico.",
+        "tipo": "Normal",
+        "potencia": 40,
+        "precisión": 100,
+        "puntos_de_poder": 35,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 6,
+        "nombre": "Finta",
+        "descripción": "Ignora aumentos de evasión del enemigo.",
+        "tipo": "Siniestro",
+        "potencia": 60,
+        "precisión": 100,
+        "puntos_de_poder": 20,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 6,
+        "nombre": "Mordisco",
+        "descripción": "Causa daño",
+        "tipo": "Normal",
+        "potencia": 60,
+        "precisión": 95,
+        "puntos_de_poder": 35,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 6,
+        "nombre": "Gruñido",
+        "descripción": "Reduce el ataque del enemigo.",
+        "tipo": "Normal",
+        "potencia": 0,
+        "precisión": 100,
+        "puntos_de_poder": 40,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 6,
+        "nombre": "Ataque Rápido",
+        "descripción": "Ataque que siempre golpea primero.",
+        "tipo": "Normal",
+        "potencia": 40,
+        "precisión": 100,
+        "puntos_de_poder": 30,
+        "blanco": "enemigo"
+    },
+    {
+        "id_pokemon": 6,
+        "nombre": "Golpe Bajo",
+        "descripción": "Ataca primero si el enemigo va a atacar.",
+        "tipo": "Siniestro",
+        "potencia": 80,
+        "precisión": 100,
+        "puntos_de_poder": 5,
+        "blanco": "enemigo"
+    }
+
+]
