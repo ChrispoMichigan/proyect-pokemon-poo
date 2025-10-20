@@ -111,10 +111,11 @@ class App:
             opcion = -1
             Utils.seleccionar_color_tipo("Fantasma")
         
-            while not opcion in [1, 2, 3]:
+            while not opcion in [1, 2, 3, 4]:
                 print("-" * 10 + "Opción[1]:Mirar mis pokemons" + "-" * 10 )
                 print("-" * 10 + "Opción[2]:Mirar estado de mis pokemons" + "-" * 10 )
                 print("-" * 10 + "Opción[3]:Enfrentar Pokemon" + "-" * 10 )
+                print("-" * 10 + "Opción[4]:Entrenar Pokemon" + "-" * 10 )
                 opcion = input('Inserta el número a escoger:\t')
                 try:
                     opcion = int(opcion)
@@ -133,6 +134,9 @@ class App:
                 aleatorio = random.randint(1, len(Data.cargar_pokemons()) - 1)
                 enemigo = Enemigo(aleatorio)
                 self.iniciar_combate(index, enemigo)
+            if opcion == 4:
+                index = self.jugador.seleccionar_pokemon()
+                self.jugador.pokemons[index].entrenar_pokemon(self.jugador.pokemons[index])
 
     def iniciar_combate(self, index_pokemon_jugador: int, enemigo : Enemigo):
         """
