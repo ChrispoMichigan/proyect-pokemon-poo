@@ -112,8 +112,6 @@ class Pokemon(PokemonBase):
         print("Actualizacion completa! ")
         print(f"Ataque: {self.ataque}, Defensa: {self.defensa}, Vida:{self.puntos_de_salud}")
 
-
-#- Bloque de pruebas: si ejecutas este archivo directamente, usa imports relativos.
 if __name__ == "__main__":
     print("Entorno de pruebas")
     pok = Pokemon(1)
