@@ -180,7 +180,9 @@ class App:
                 # Turno del jugador
                 dano = self._turno_jugador(pokemon_jugador, pokemon_enemigo)
                 vida_enemigo = max(0, vida_enemigo - dano)
-                
+                print("-" * 10 + "Avanzando al siguiente turno..." + "-" * 10)
+                os.system('pause')
+                os.system('cls')
                 if vida_enemigo <= 0:
                     break
                     
@@ -188,7 +190,9 @@ class App:
                 # Turno del enemigo
                 dano = self._turno_enemigo(pokemon_enemigo, pokemon_jugador)
                 vida_jugador = max(0, vida_jugador - dano)
-                
+                print("-" * 10 + "Avanzando al siguiente turno..." + "-" * 10)
+                os.system('pause')
+                os.system('cls')
                 if vida_jugador <= 0:
                     break
             
