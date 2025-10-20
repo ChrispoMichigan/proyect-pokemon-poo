@@ -76,12 +76,6 @@ class Combate:
         precision: int,
         tipo_ataque: str
     ) -> int:
-        """
-        Calcula el daño infligido basado en los tipos y estadísticas.
-        
-        Returns:
-            int: Daño calculado (entero). Retorna 0 si el ataque falla.
-        """
         
         if not Combate._ataque_acierta(precision):
             Utils.seleccionar_color_tipo("Normal")

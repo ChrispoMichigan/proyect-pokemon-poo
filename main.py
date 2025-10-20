@@ -140,9 +140,7 @@ class App:
                 self.jugador.pokemons[index].entrenar_pokemon(self.jugador.pokemons[index])
 
     def iniciar_combate(self, index_pokemon_jugador: int, enemigo : Enemigo):
-        """
-        Sistema de combate por turnos entre el pokémon del jugador y un enemigo.
-        """
+
         os.system('cls')
         
         pokemon_jugador = self.jugador.pokemons[index_pokemon_jugador]
@@ -191,7 +189,6 @@ class App:
         self._mostrar_resultado_combate(pokemon_jugador, pokemon_enemigo, vida_jugador, vida_enemigo)
     
     def _mostrar_estado_combate(self, pokemon_jugador : Pokemon, pokemon_enemigo : Enemigo, vida_jugador : int, vida_enemigo : int):
-        """Muestra el estado actual del combate."""
         Utils.seleccionar_color_tipo("Fantasma")
         print("=" * 60)
         print(" " * 20 + "ESTADO DEL COMBATE" + " " * 20)
@@ -212,7 +209,6 @@ class App:
         print("-" * 60)
     
     def _turno_jugador(self, pokemon_jugador : Pokemon, pokemon_enemigo : Enemigo):
-        """Maneja el turno del jugador."""
         Utils.seleccionar_color_tipo("Planta")
         print(f"\nTurno de {pokemon_jugador.nombre}!")
         Utils.reset_color()
@@ -255,7 +251,6 @@ class App:
         return dano
     
     def _turno_enemigo(self, pokemon_enemigo : Enemigo, pokemon_jugador : Pokemon):
-        """Maneja el turno del enemigo (IA simple)."""
         Utils.seleccionar_color_tipo("Fuego")
         print(f"\nTurno de {pokemon_enemigo.nombre}!")
         Utils.reset_color()
@@ -285,7 +280,6 @@ class App:
         return dano
     
     def _mostrar_resultado_combate(self, pokemon_jugador : Pokemon, pokemon_enemigo : Enemigo, vida_jugador : int, vida_enemigo : int):
-        """Muestra el resultado final del combate."""
         os.system('cls')
         
         if vida_enemigo <= 0:
@@ -310,13 +304,13 @@ class App:
         os.system('pause')
     
     def _opcion_atrapar_pokemon(self, pokemon_enemigo):
-        """Ofrece la opción de atrapar al Pokémon derrotado."""
         Utils.seleccionar_color_tipo("Fantasma")
         print(f"\n¿Quieres intentar atrapar a {pokemon_enemigo.nombre}?")
         print("1. Sí, intentar atraparlo")
         print("2. No, continuar")
         Utils.reset_color()
         
+
         while True:
             try:
                 opcion = int(input("\nElige una opción: "))
