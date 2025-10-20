@@ -5,8 +5,9 @@ from clases.pokemonBase import PokemonBase
 from clases.habilidad import Habilidad
 from clases.data import Data
 from clases.utils import Utils
+from clases.entrenamiento import Entrenamiento
 
-class Pokemon(PokemonBase):
+class Pokemon(PokemonBase, Entrenamiento):
     def __init__(self, id_pokemon : int, atrapado : bool = False) -> None:
         super().__init__()
         self.atrapado = atrapado
@@ -25,7 +26,32 @@ class Pokemon(PokemonBase):
             print("-" * 5 + "Descripción:" + "-" * 20)
             print("-" * 5 + habilidad.descripcion + "-" * 20)
             Utils.reset_color()
-    
+
+    def aumentar_nivel(self):
+        self.nivel += 100
+        if self.nivel >= 100:
+            self.evolucionar()
+        
+    def evolucionar(self):
+        Utils.seleccionar_color_tipo("Fuego")
+        print("-" * 10 + "Tu Pokemon acaba de evolucionar" + "-" * 10)
+        for pokemon in Data.cargar_evoluciones():
+            if pokemon["id_pokemon"] == self.id:
+                self.nombre = pokemon["nombre"]
+                self.tipo = pokemon["tipo"]
+                self.descripcion = pokemon["descripción"]
+                self.ataque = pokemon["ataque"]
+                self.defensa = pokemon["defensa"]
+                self.puntos_de_salud = pokemon["puntos_de_salud"]
+                self.poder_de_combate = pokemon["poder_de_combate"]
+                self.evolucion = pokemon["evolucion"]
+                self.nivel = random.randint(1, 6)
+                
+                Utils.reset_color()
+                self.detalles()
+                
+                return
+        
     def __crear_pokemon(self, id : int):
         for pokemon in Data.cargar_pokemons():
             if pokemon["id"] == id:
@@ -62,11 +88,12 @@ class Pokemon(PokemonBase):
                     select["blanco"]
                 )
             self.habilidades.append(nueva_habilidad)
-        
         return
 
     def detalles(self):
         Utils.seleccionar_color_tipo("Fuego")
+        print("----- HABLA ASÍ ---------------")
+        self.hablar()
         print("----- DETALLES DEL POKEMON ---------------")
         print(f"-----Nombre: {self.nombre} -----")
         print(f"-----Descripcion: {self.descripcion} -----")
@@ -93,15 +120,15 @@ class Pokemon(PokemonBase):
             print(f"El pokemon ha evolucionado! Ahora es :{self.nombre}  Evolucion {self.evolucion}")
             self.nivel = 0
 
-    def subirAtaque(self):
+    def subir_ataque(self):
         self.ataque += self.boots_ataque
         print(f"Ataque aumentado! Nuevo valor: {self.ataque}")
 
-    def subirDesensa(self):
+    def subir_defensa(self):
         self.defensa += self.boots_defensa
         print(f"Defensa aumentada! Nuevo valor: {self.defensa}")
 
-    def subirVida(self):
+    def subir_puntos_de_salud(self):
         self.puntos_de_salud += self.boots_puntos_de_salud
         print(f"Vida aumentada! Nuevo valor: {self.puntos_de_salud}")
 
