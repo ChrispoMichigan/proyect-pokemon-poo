@@ -85,7 +85,7 @@ class App:
 
     def seleccionar_inicial(self):
         opcion = 0
-        while opcion <= 0 or opcion >= 6:
+        while not opcion in [1, 2, 3, 4, 7]:
             Utils.seleccionar_color_tipo("Fantasma")
             opcion = input('Inserta el número a escoger:\t')
             try:
