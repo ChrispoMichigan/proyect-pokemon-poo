@@ -108,9 +108,10 @@ class App:
             opcion = -1
             Utils.seleccionar_color_tipo("Fantasma")
         
-            while not opcion in [1, 2]:
+            while not opcion in [1, 2, 3]:
                 print("-" * 10 + "Opción[1]:Mirar mis pokemons" + "-" * 10 )
                 print("-" * 10 + "Opción[2]:Mirar estado de mis pokemons" + "-" * 10 )
+                print("-" * 10 + "Opción[3]:Entrenar Pokemon" + "-" * 10 )
                 opcion = input('Inserta el número a escoger:\t')
                 try:
                     opcion = int(opcion)
@@ -124,6 +125,9 @@ class App:
             if opcion == 2:
                 for i in range(len(self.jugador.pokemons)):
                     self.jugador.mostrar_estado_pokemon(i)
+            if opcion == 3:
+                index = self.jugador.seleccionar_pokemon()
+                self.jugador.mostrar_estado_pokemon(index)
 
 if __name__ == "__main__":
     game = App()

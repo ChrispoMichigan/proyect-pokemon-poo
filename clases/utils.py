@@ -51,8 +51,6 @@ class Utils:
             print(Back.BLACK , end="")
             print(Fore.WHITE, end="")
             return
-        
-        
 
     @staticmethod 
     def reset_color():

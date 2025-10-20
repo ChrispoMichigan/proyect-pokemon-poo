@@ -38,3 +38,15 @@ class Data:
         except json.JSONDecodeError:
             print("Error: El archivo JSON no tiene un formato válido")
             return []
+        
+    @staticmethod
+    def cargar_evoluciones() -> list:
+        try:
+            with open('data/evoluciones.json', 'r', encoding='utf-8') as archivo:
+                return json.load(archivo)
+        except FileNotFoundError:
+            print("Error: No se encontró el archivo evoluciones.json")
+            return []
+        except json.JSONDecodeError:
+            print("Error: El archivo JSON no tiene un formato válido")
+            return []

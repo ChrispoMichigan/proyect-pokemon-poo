@@ -1,0 +1,68 @@
+[
+    {
+        "id_pokemon": 1,
+        "nombre": "Raichu",
+        "tipo": ["Eléctrico"],
+        "descripción": "Su cola actúa como pararrayos. Libera descargas más potentes que Pikachu.",
+        "ataque": 134,
+        "defensa": 110,
+        "puntos_de_salud": 115,
+        "poder_de_combate": 1080,
+        "evolucion": 2
+    },
+    {
+        "id_pokemon": 2,
+        "nombre": "Ivysaur",
+        "tipo": ["Planta", "Veneno"],
+        "descripción": "La semilla de su lomo ha florecido. Su cuerpo es más fuerte y robusto.",
+        "ataque": 138,
+        "defensa": 128,
+        "puntos_de_salud": 120,
+        "poder_de_combate": 1125,
+        "evolucion": 2
+    },
+    {
+        "id_pokemon": 3,
+        "nombre": "Charmeleon",
+        "tipo": ["Fuego"],
+        "descripción": "Su llama arde con más intensidad. Se vuelve más agresivo en combate.",
+        "ataque": 135,
+        "defensa": 108,
+        "puntos_de_salud": 115,
+        "poder_de_combate": 1105,
+        "evolucion": 2
+    },
+    {
+        "id_pokemon": 4,
+        "nombre": "Wartortle",
+        "tipo": ["Agua"],
+        "descripción": "Sus orejas y cola peluda indican madurez. Su caparazón es más resistente.",
+        "ataque": 110,
+        "defensa": 140,
+        "puntos_de_salud": 122,
+        "poder_de_combate": 1090,
+        "evolucion": 2
+    },
+    {
+        "id_pokemon": 5,
+        "nombre": "Wigglytuff",
+        "tipo": ["Normal", "Hada"],
+        "descripción": "Su cuerpo es suave y elástico. Canta con más potencia para dormir enemigos.",
+        "ataque": 95,
+        "defensa": 60,
+        "puntos_de_salud": 135,
+        "poder_de_combate": 1025,
+        "evolucion": 2
+    },
+    {
+        "id_pokemon": 6,
+        "nombre": "Persian",
+        "tipo": ["Normal"],
+        "descripción": "Elegante y veloz, ataca con precisión. Su agilidad intimida a sus rivales.",
+        "ataque": 110,
+        "defensa": 92,
+        "puntos_de_salud": 115,
+        "poder_de_combate": 1050,
+        "evolucion": 2
+    }
+]

@@ -34,20 +34,18 @@ class Jugador:
 
     def seleccionar_pokemon(self) -> int:
         Utils.seleccionar_color_tipo("Fantasma")
-        for pokemon in self.pokemons:
-            print("-" * 10 + "Selecciona la id: " + str(pokemon.id) + "-" * 10)
-            print("-" * 10 + pokemon.nombre + "-" * 10)
+        
+        for i, pokemon in enumerate(self.pokemons):
+            print("-" * 10 + "Selecciona el index: " + "-" * 10)
+            print("-" * 10 + "[" + str(i) + "]" + pokemon.nombre + "-" * 10)
         opcion = -1
         while True:
-            opcion = input("Inserta la id:\t")
+            opcion = input("Inserta el index:\t")
             try:
                 opcion = int(opcion)
-                break
+                if opcion > -1 and opcion < len(self.pokemons):
+                    return opcion
             except Exception:
                 print("Seleccione una opción valida")
 
-        for pokemon in self.pokemons:
-            if pokemon.id == opcion:
-                return opcion
             
-        return -1
