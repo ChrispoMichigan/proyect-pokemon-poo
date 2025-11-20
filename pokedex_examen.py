@@ -279,10 +279,182 @@ class App:
                     break
             except ValueError:
                 print("Ingresa un numero valido.")
+  def _crear_enemigos_por_defecto(self) -> List[Pokemon]:
+      e1 = Fuego("Enemigo Fuerte 1", "Firme y peligroso", ataque=80, defensa=80, vida=200, nivel=50)
+      e2 = Electrico("Enemigo Fuerte 2", "Agil y potente", ataque=70, defensa=60, vida=180, nivel=48)
+      e3 = Hierba("Enemigo Debil 1", "Tranquilo", ataque=20, defensa=20, vida=80, nivel=5)
+      e4 = Agua("Enemigo Debil 2", "Aguas calmadas", ataque=15, defensa=18, vida=70, nivel=4)
+      return [e1, e2, e3, e4]
+
+  def main_loop(self):
+      while True:
+          Utils.print_title("MENU PRINCIPAL")
+          print("1. Detalles de mi Pokemon")
+          print("2. Hablar Pokemon")
+          print("3. Entretenimiento ")
+          print("4. Combatir")
+          print("5. Ver Pokemon Atrapado")
+          print("6. Crear Pokemon Enemigo")
+          print("7. Salir")
+          try:
+              op = int(input("Elige una opcion:  "))
+          except ValueError:
+              print("Ingresa un numero valido")
+              Utils.pause()
+              Utils.clear()
+              continue
 
 
-        
-      
+          Utils.clear()
+          if op == 1:
+              if self.mi_pokemon:
+                  self.mi_pokemon.detallesPokemon()
+              else:
+                  print("No tienes Pokemon.")
+                  Utils.pause()
+
+          if op == 2:
+              if self.mi_pokemon:
+                  self.mi_pokemon.hablar()
+              else:
+                  print("No tienes Pokemon.")
+                  Utils.pause()
+
+          if op == 3:
+              if self.mi_pokemon:
+                  self.menu_entrenamiento()
+              else:
+                  print("No tienes Pokemon.")
+                  Utils.pause()
+
+          elif op == 4:
+              if self.mi_pokemon:
+                  self.menu_combatir()
+              else:
+                  print("No tienes Pokemon.")
+                  Utils.pause()
+
+          elif op == 5:
+              self.verPokemonAtrapados()
+          elif op == 6:
+              self.crear_pokemon_enemigo_manual()
+          elif op == 7:
+              print("Gracias por usar la Pokedex! Hasta luego.")
+              break
+          else:
+              print:("Opcion invalida")
+          Utils.clear()
+#entrenamiento
+
+def menu_entretenimiento(self):
+    while True:
+        Utils.print_title("ENTRENAMIENTO")
+        print("1. Entrenaiento Normal")
+        print("2. Entrenamiento Individual")
+        print("3. Entrenamiento Intensivo")
+        print("4. Entrenamiento Personalizado")
+        print("0.Volver")
+        try:
+            op = int(input(Elige una opcion:  ))
+        except ValueError:
+            print("Ingresa un numero valido.")
+            Utils.pause()
+            Utils.clear()
+            continue
+
+        Utils.clear()
+        if op == 1:
+            self.mi_pokemon.entrenar()
+            Utils.pause()
+
+        elif op == 2:
+            print("1. Subir Ataque")
+            print("2. Subir Defensa")
+            print("3. Subir Vida")
+            try:
+                s = int(input("Elige:  "))
+                if s == 1:
+                    self.mi_pokemon.subirAtaque()
+                elif s == 2:
+                    self.mi_pokemon.subirDefensa()          
+                elif s == 3:
+                    self.mi_pokemon.subirVida()
+                else:
+                    print("Opcion invalida.")
+            except ValueError:
+                print("Valor invalido.")
+            Utils.pause()
+
+        elif op == 3:
+            self.mi_pokemon.actualizar()
+            evoluciono = self.mi_pokemon.subir_nivel(10)
+            if evoluciono:
+                idx = min(self.mi_pokemon.evoluciono - 1, len(self.mi_pokemon.evoluciones_nombres) - 1)
+                self.mi_pokemon.nombre = self.mi_pokemon.evoluciones_nombres[idx]
+                print(f"El pokemon ha evolucionado! Ahora es: {self.mi_pokemon.nombre}")
+            Utils.pause()
+
+
+        elif op == 4:
+            try:
+                a = int(input("Ingresa nuevo valor de Ataque:  "))
+                d = int(input("Ingresa nuevo valor de Defensa:  "))
+                v = int(input("Ingresa nuevo valor de Vida:  "))
+                self.mi_pokemon.ataque += a
+                self.mi_pokemon.defensa += d
+                self.mi_pokemon.vida += v
+                print("Valores actualizados manualmente.")
+            except ValueError:
+                print("Entrada invalida.")
+            Utils.pause()
+
+
+
+
+        elif op == 0:
+            break
+        else: 
+            print("Opcion invalida.")
+        Utils.clear()
+
+#combate u atrapado
+
+def select_enemy(self) -> Pokemon:
+    if not self.enemigos:
+        self.enemigos = self._crear_enemigos_por_defecto()
+    enemy = random.choise(self.enemigos)
+    return enemy
+
+def menu_combatir(self):
+    Utils.print_title("COMBATE")
+    print("Deseas elegir un enemigo o que sea aleatoreamente?")
+    print("1. Aleatorio")
+    print("2. Elegir de la lista")
+    print("0. Volver")
+    try:
+        choise = int(input("Elige:  "))
+    except ValueError:
+        print("Valor invalido.")
+        Utils.pause()
+        return
+    Utils.clear()
+    if choice == 0:
+        return 
+    if choice == 1:
+        enemigo = self.select_enemy()
+    else:
+        for i, e in enumerate(self.enemigos, start = 1):
+            print(f"{i}. {e.nombre} - Ataque {e.ataque} | Defensa {e.defensa} | Vida {e.vida} | Nivel {e.nivel}")
+        try:
+            idx = int(input("Elige indice:  ")) - 1
+            enemigo = self.enemigos[idx]
+        except Exception:
+            print("Seleccion invalida.")
+            Utils.pause()
+            return
+
+#combate por turnos
+    self.combate_con_enemigos(enemigo)
 
 
 
