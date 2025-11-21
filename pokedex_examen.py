@@ -24,15 +24,8 @@ class Utils:
 
 
 class PokemonBase(ABC):
-  def __init__(self,
-      nombre: str = "Sin Pokemon"
-      descripcion: str = "No descripcion",
-      ataque: int = 0,
-      defensa: int = 0,
-      vida: int = 0,
-      nivel: int = 1,
-      evolucion: int 1,
-      atrapado: bool = False):
+  def __init__(self, nombre: str = "Sin Pokemon", descripcion: str = "No descripcion", 
+               ataque: int = 0, defensa: int = 0, vida: int = 0, nivel: int = 1, evolucion: int 1, atrapado: bool = False):
 
       self.nombre: str = nombre
       self.descripcion: str = descripcion
@@ -42,9 +35,10 @@ class PokemonBase(ABC):
       self.nivel: int = max(1, int(nivel))
       self.evolucion: int = max(1, int(evolucion))
 
+                 #permite 3 evoluciones 
       if self.evolucion > 3:
           self.evolucion = 3
-      self.atrapadp: bool = atrapado
+      self.atrapado: bool = atrapado
 
   @abstractmethod
   def hablar(self):
@@ -454,9 +448,63 @@ def menu_combatir(self):
             return
 
 #combate por turnos
-    self.combate_con_enemigos(enemigo)
+    self.combate_con_enemigos(enemigo
 
+def combate_con_enemigo(self, enemigo: Pokemon):
+    mi_def = self.mi_pokemon.defensa
+    mi_vida = self.mi_pokemon.vida
+    en_def = self.enemigo.defensa
+    en_vida = self.enemigo.vida 
 
+    turno_jugador = True
+
+    while (mi_vida > 0) and (en_vida > 0):
+        Utils.clear()
+        Utils.print_title("COMBATE - ESTADO ")
+        print("Tu Pokemon:  ")
+        print(f"{self.mi_pokemon.nombre} | Ataque: {self.mi_pokemon.ataque} | Defensa:{mi_def} | Vida: {mi_vida}")
+        print("-" * 40)
+        print("Enemigo:  ")
+        print(f"{enemigo.nombre} | Ataque: {enemigo.ataque} | Defensa: {en_def} | Vida: {en_vida}")
+        print("-" * 40)
+
+        if turno_jugador:
+            print("Tu tunro: elige una accion")
+            print("1. Pasar turno")
+            print("2. Ataque normal")
+            print("3. Ataque especial")
+            print("4. Huir")
+
+            try:
+                op = int(input("Elige:  "))
+            except ValueError:
+                print("Entrada invalida, se considera pasar turno.")
+                op = 1
+
+            if op == 1:
+                print("Pase el turno.")
+            elif op == 2:
+                en_def, en_vida = aplicar_dano(self.mi_pokemon.ataque, en_def, en_vida)
+                print(f"Hiciste un ataque normal con {self.mi_pokemon.ataque}.")
+            elif op == 3:
+                atk_val = int(self.mi_pokemon.ataque * 1.5)
+                en_def, en_vida = aplicar_dano(atk_val, en_def, en_vida)
+                special = getattr(self.mi_pokemon, "ataque_especial", "Ataque Especial")
+                print(f"{self.mi_pokemon.nombre} usa {special} ({atk_val} dmg).")
+            elif op == 4:
+                print("Huyes del combate.")
+                Utils.pause()
+                return
+            else:
+                print("Opcion invalida, se considera pasar turno.")
+        else:
+            choice = random.choice([1, 2, 3])
+            if choice == 1:
+                print(f"{enemigo.nombre} pasa el turno.")
+            elif choice == 2:
+                mi_def, mi_vida = aplicar_dano(enemigo.ataque, mi_def, mi_vida)
+                print(f" {enemigo.nombre} te golpea con ataque normal ({enemigo.ataque}).")
+              
 
 
 
