@@ -504,7 +504,93 @@ def combate_con_enemigo(self, enemigo: Pokemon):
             elif choice == 2:
                 mi_def, mi_vida = aplicar_dano(enemigo.ataque, mi_def, mi_vida)
                 print(f" {enemigo.nombre} te golpea con ataque normal ({enemigo.ataque}).")
-              
+            elif choice == 3:
+                atk_val = int(enemigo.ataque * 1.5)
+                mi_def, mi_vida = aplicar_dano(atk_val, mi_def, mi_vida)
+                special = getattr(enemigo, "ataque_especial", "Atgaque Especial")
+                print(f"{enemigo.nombre} usa {special} ({stk_val} dmg).")
+
+        Utils.pause()
+        turno_jugador = not turno_jugador
+
+
+    Utils.clear()
+    if en_vida <= 0:
+        print("Has derrotado al enemigo!")
+        if enemigo.vida < self.mi_pokemon.vida:
+            print("Puedes intentar atraparlo.")
+            print("1. Intentar atrapar")
+            print("2. No atrapar")
+            try:
+                sel = int(input("Elige: "))
+            except ValueError:
+                sel = 2
+            if sel == 1:
+                prob = 0.5
+                success = random.random() < prob
+                if success:
+                    enemigo.atrapado = True
+                    self.pokemons_atrapados.append(enemigo)
+                    print(f"Has atrapado a {enemigo.nombre}!")
+                else:
+                    print(f"{enemigo.nombre} ha escapado.")
+            else:
+                print("Decides no atrapar.")
+        else:
+            print("El enemigo es demasiado fuerte para atraparlo.")
+    else:
+        print("Has sido derrotado...")
+    Utilst.pause()
+
+
+  def VerPokemonsAtrapados(self):
+      Utils.print_tittle("POKEMON ATRAPADOS")
+      if not self.pokemons_atrapados:
+          print("No has atrapado pokemons aun. ")
+      else:
+          for i, p in enumerate(self.pokemons_atrapados, start = 1):
+              print(f"{i}. {p.nombre} - Ataque: {p.ataque} Defensa:{p.defensa} Vida:{p.vida} Nivel:{p.nivel}")
+      Utils.pause()
+
+
+  def crear_pokemon_enemigo_manual(self):
+      Utils.print_title("CREAR POKEMON ENEMIGO")
+      try:
+          nombre = input("Nombre del enemigo: ").strip() or "Enemigo creado"
+          desc = input("Descripcion:  ").strip() or "Enemigo"
+          ataque = int(intput("Ataque(1-1000): "))
+          defensa = int(intput("Defensa (1-1000):  "))
+          vida = int(input("Vida (1-1000):  "))
+          nivel = int(input("Nivel (1-100):  "))
+      except ValueError:
+          print("Entrada invalida - valores numericos requeridos.")
+          Utils.pause()
+          return
+
+      print("Tipo del enemigo: ")
+      print("1. Agua  2. Fuego  3. Electrico  4. Hierba ")
+      try:
+          t = int(intpu("Elige tipo: "))
+      except ValueError:
+          t = 1
+      if t == 1:
+          nuevo = Agua(nombre, desc, ataque, defensa, vida, nivel)
+      elif t == 2:
+          nuevo = Fuego(nombre, desc, ataque, defensa, vida, nivel)
+      elif t == 3:
+          nuevo = Electrico(nombre, desc, ataque, defensa, vida, nivel)
+      else:
+          nuevo = Hierba(nombre, desc, ataque, defensa, vida, nivel)
+      self.enemigos.append(nuevo)
+      print(f"Enemigo {nuevo.nombre} creado y añadido a la lista de enemigos. ")
+      Utils.pause()
+
+if __name__ == "__main__":
+    try:
+        App()
+    except KeyboardInterrupt:
+        print("\nPrograma interrumpido por el usuario.  Hasta luego! ")
+                    
 
 
 
