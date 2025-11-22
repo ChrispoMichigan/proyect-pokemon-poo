@@ -43,8 +43,6 @@ class PokemonBase(ABC):
         self.vida: int = max(0, int(vida))
         self.nivel: int = max(1, int(nivel))
         self.evolucion: int = max(1, int(evolucion))
-
-#permite 3 evoluciones 
         if self.evolucion > 3:
             self.evolucion = 3
         self.atrapado: bool =  bool (atrapado)
@@ -66,11 +64,10 @@ class PokemonBase(ABC):
         if self.nivel >= 100:
             if self.evolucion < 3:
                 self.evolucion += 1
-                if reiniciar_on_evol:
-                    self.nivel = 0
-            return True 
-        else:
-            self.nivel = 0
+                self.nivel = 0
+                return True 
+            else:
+                self.nivel = 0
         return False
 
 
@@ -95,7 +92,6 @@ class Pokemon(PokemonBase):
     BOOST_DEFENSA = 20
     BOOST_VIDA = 20
 
-
     def __init__(self,
         nombre: str = "Sin Pokémon",
         descripcion: str = "No descripción",
@@ -116,12 +112,8 @@ class Pokemon(PokemonBase):
             self.evoluciones_nombres = [self.nombre]
 
 
-            if 1 <= self.evolucion <= len(self.evoluciones_nombres):
-                self.nombre = self.evoluciones_nombres[self.evolucion - 1 ]
-
-    def hablar(self):
-        print(f"{self.nombre}! {self.nombre}!")
-
+        if 1 <= self.evolucion <= len(self.evoluciones_nombres):
+            self.nombre = self.evoluciones_nombres[self.evolucion - 1 ]
 
     def detallesPokemon(self):
         Utils.print_title("DETALLES DEL POKEMON")
@@ -133,6 +125,10 @@ class Pokemon(PokemonBase):
         print(f"Nivel          : {self.nivel}")
         print(f"Evolucion      : {self.evolucion}")
         print(f"Atrapado       : {self.atrapado}")
+
+
+    def hablar(self):
+        print(f"{self.nombre}! {self.nombre}!")
 
     def entrenar(self):
         self.ataque += 10
@@ -242,7 +238,7 @@ class App:
         self.jugador_nombre: str = ""
         self.mi_pokemon: Optional[Pokemon] = None
         self.pokemons_atrapados : List[Pokemon] = []
-    #enemigos por defecto 2 debiles y 2 fuertes
+        #enemigos por defecto 2 debiles y 2 fuertes
         self.enemigos: List[Pokemon] = self._crear_enemigos_por_defecto()
         Utils.clear()
         self.bienvenida()
@@ -260,12 +256,12 @@ class App:
     def elegir_inicial(self):
         Utils.print_title("Elege tu Pokemon inicial")
         opciones = [
-                ("Agua", Agua("Squirtle", "Pokémon tortuga", ataque=20, defensa=30, vida=100, nivel=1, evoluciones_nombres=["Squirtle", "Wartortle", "Blastoise"])),
-                ("Fuego", Fuego("Charmander", "Pokémon de fuego", ataque=25, defensa=20, vida=90, nivel=1, evoluciones_nombres=["Charmander", "Charmeleon", "Charizard"])),
-                ("Eléctrico", Electrico("Pichu", "Pokémon eléctrico", ataque=18, defensa=18, vida=80, nivel=1, evoluciones_nombres=["Pichu", "Pikachu", "Raichu"])),
-                ("Hierba", Hierba("Bulbasaur", "Pokémon planta", ataque=22, defensa=22, vida=95, nivel=1, evoluciones_nombres=["Bulbasaur", "Ivysaur", "Venusaur"]))
-            ]
-        for idx, (tipo, poke) in enumerate(opciones, strart = 1):
+            ("Agua", Agua("Squirtle", "Pokemon tortuga", ataque=20, defensa=30, vida=100, nivel=1, evoluciones_nombres=["Squirtle", "Wartortle", "Blastoise"])),
+            ("Fuego", Fuego("Charmander", "Pokemon de fuego", ataque=25, defensa=20, vida=90, nivel=1, evoluciones_nombres=["Charmander", "Charmeleon", "Charizard"])),
+            ("Eléctrico", Electrico("Pichu", "Poemon eléctrico", ataque=18, defensa=18, vida=80, nivel=1, evoluciones_nombres=["Pichu", "Pikachu", "Raichu"])),
+            ("Hierba", Hierba("Bulbasaur", "Pokémon planta", ataque=22, defensa=22, vida=95, nivel=1, evoluciones_nombres=["Bulbasaur", "Ivysaur", "Venusaur"]))
+        ]
+        for idx, (tipo, poke) in enumerate(opciones, start = 1):
             print(f"{idx}. {tipo} - {poke.nombre} - Ataque {poke.ataque} | Defensa {poke.defensa} | Vida {poke.vida}")
         print("0. Salir")
         while True:
@@ -285,6 +281,7 @@ class App:
                     break
             except ValueError:
                 print("Ingresa un numero valido.")
+
     def _crear_enemigos_por_defecto(self) -> List[Pokemon]:
         e1 = Fuego("Enemigo Fuerte 1", "Firme y peligroso", ataque=80, defensa=80, vida=200, nivel=50)
         e2 = Electrico("Enemigo Fuerte 2", "Agil y potente", ataque=70, defensa=60, vida=180, nivel=48)
@@ -297,7 +294,7 @@ class App:
             Utils.print_title("MENU PRINCIPAL")
             print("1. Detalles de mi Pokemon")
             print("2. Hablar Pokemon")
-            print("3. Entretenimiento ")
+            print("3. Entrenamiento ")
             print("4. Combatir")
             print("5. Ver Pokemon Atrapado")
             print("6. Crear Pokemon Enemigo")
@@ -319,14 +316,14 @@ class App:
                     print("No tienes Pokemon.")
                     Utils.pause()
 
-            if op == 2:
+            elif op == 2:
                 if self.mi_pokemon:
                     self.mi_pokemon.hablar()
                 else:
                     print("No tienes Pokemon.")
                     Utils.pause()
 
-            if op == 3:
+            elif op == 3:
                 if self.mi_pokemon:
                     self.menu_entrenamiento()
                 else:
@@ -341,21 +338,24 @@ class App:
                     Utils.pause()
 
             elif op == 5:
-                self.verPokemonAtrapados()
+                self.verPokemonsAtrapados()
+
             elif op == 6:
                 self.crear_pokemon_enemigo_manual()
+
             elif op == 7:
                 print("Gracias por usar la Pokedex! Hasta luego.")
                 break
+
             else:
                 print("Opcion invalida")
             Utils.clear()
     #entrenamiento
 
-    def menu_entretenimiento(self):
+    def menu_entrenamiento(self):
         while True:
             Utils.print_title("ENTRENAMIENTO")
-            print("1. Entrenaiento Normal")
+            print("1. Entrenamiento Normal")
             print("2. Entrenamiento Individual")
             print("3. Entrenamiento Intensivo")
             print("4. Entrenamiento Personalizado")
@@ -395,7 +395,7 @@ class App:
                 self.mi_pokemon.actualizar()
                 evoluciono = self.mi_pokemon.subir_nivel(10)
                 if evoluciono:
-                    idx = min(self.mi_pokemon.evoluciono - 1, len(self.mi_pokemon.evoluciones_nombres) - 1)
+                    idx = min(self.mi_pokemon.evolucion - 1, len(self.mi_pokemon.evoluciones_nombres) - 1)
                     self.mi_pokemon.nombre = self.mi_pokemon.evoluciones_nombres[idx]
                     print(f"El pokemon ha evolucionado! Ahora es: {self.mi_pokemon.nombre}")
                 Utils.pause()
@@ -424,7 +424,7 @@ class App:
     def select_enemy(self) -> Pokemon:
         if not self.enemigos:
             self.enemigos = self._crear_enemigos_por_defecto()
-        enemy = random.choise(self.enemigos)
+        enemy = random.choice(self.enemigos)
         return enemy
 
     def menu_combatir(self):
@@ -456,7 +456,7 @@ class App:
                 return
 
 #combate por turnos
-        self.combate_con_enemigos(enemigo)
+        self.combate_con_enemigo(enemigo)
 
     def combate_con_enemigo(self, enemigo: Pokemon):
         mi_def = self.mi_pokemon.defensa
@@ -517,9 +517,8 @@ class App:
                         special = getattr(enemigo, "ataque_especial", "Atgaque Especial")
                         print(f"{enemigo.nombre} usa {special} ({atk_val} dmg).")
 
-        Utils.pause()
-        turno_jugador = not turno_jugador
-
+                        Utils.pause()
+                        turno_jugador = not turno_jugador
 
         Utils.clear()
         if en_vida <= 0:
@@ -549,91 +548,58 @@ class App:
             print("Has sido derrotado...")
         Utils.pause()
 
+    def VerPokemonsAtrapados(self):
+        Utils.print_tittle("POKEMON ATRAPADOS")
+        if not self.pokemons_atrapados:
+            print("No has atrapado pokemons aun. ")
+        else:
+            for i, p in enumerate(self.pokemons_atrapados, start = 1):
+                print(f"{i}. {p.nombre} - Ataque: {p.ataque} Defensa:{p.defensa} Vida:{p.vida} Nivel:{p.nivel}")
+        Utils.pause()
 
-        def VerPokemonsAtrapados(self):
-            Utils.print_tittle("POKEMON ATRAPADOS")
-            if not self.pokemons_atrapados:
-                print("No has atrapado pokemons aun. ")
-            else:
-                for i, p in enumerate(self.pokemons_atrapados, start = 1):
-                    print(f"{i}. {p.nombre} - Ataque: {p.ataque} Defensa:{p.defensa} Vida:{p.vida} Nivel:{p.nivel}")
+    def crear_pokemon_enemigo_manual(self):
+        Utils.print_title("CREAR POKEMON ENEMIGO")
+        try:
+            nombre = input("Nombre del enemigo: ").strip() or "Enemigo creado"
+            desc = input("Descripcion:  ").strip() or "Enemigo"
+            ataque = int(input("Ataque(1-1000): "))
+            defensa = int(input("Defensa (1-1000):  "))
+            vida = int(input("Vida (1-1000):  "))
+            nivel = int(input("Nivel (1-100):  "))
+        except ValueError:
+            print("Entrada invalida - valores numericos requeridos.")
             Utils.pause()
+            return
 
-
-        def crear_pokemon_enemigo_manual(self):
-            Utils.print_title("CREAR POKEMON ENEMIGO")
-            try:
-                nombre = input("Nombre del enemigo: ").strip() or "Enemigo creado"
-                desc = input("Descripcion:  ").strip() or "Enemigo"
-                ataque = int(input("Ataque(1-1000): "))
-                defensa = int(input("Defensa (1-1000):  "))
-                vida = int(input("Vida (1-1000):  "))
-                nivel = int(input("Nivel (1-100):  "))
-            except ValueError:
-                print("Entrada invalida - valores numericos requeridos.")
-                Utils.pause()
-                return
-
-            print("Tipo del enemigo: ")
-            print("1. Agua  2. Fuego  3. Electrico  4. Hierba ")
-            try:
-                t = int(input("Elige tipo: "))
-            except ValueError:
-                t = 1
-            if t == 1:
-                nuevo = Agua(nombre, desc, ataque, defensa, vida, nivel)
-            elif t == 2:
-                nuevo = Fuego(nombre, desc, ataque, defensa, vida, nivel)
-            elif t == 3:
-                nuevo = Electrico(nombre, desc, ataque, defensa, vida, nivel)
-            else:
-                nuevo = Hierba(nombre, desc, ataque, defensa, vida, nivel)
-            self.enemigos.append(nuevo)
-            print(f"Enemigo {nuevo.nombre} creado y añadido a la lista de enemigos. ")
-            Utils.pause()
+        print("Tipo del enemigo: ")
+        print("1. Agua  2. Fuego  3. Electrico  4. Hierba ")
+        try:
+            t = int(input("Elige tipo: "))
+        except ValueError:
+            t = 1
+        if t == 1:
+            nuevo = Agua(nombre, desc, ataque, defensa, vida, nivel)
+        elif t == 2:
+            nuevo = Fuego(nombre, desc, ataque, defensa, vida, nivel)
+        elif t == 3:
+            nuevo = Electrico(nombre, desc, ataque, defensa, vida, nivel)
+        else:
+            nuevo = Hierba(nombre, desc, ataque, defensa, vida, nivel)
+        self.enemigos.append(nuevo)
+        print(f"Enemigo {nuevo.nombre} creado y añadido a la lista de enemigos. ")
+        Utils.pause()
 
 if __name__ == "__main__":
     try:
         App()
     except KeyboardInterrupt:
         print("\nPrograma interrumpido por el usuario.  Hasta luego! ")
-                    
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
 
 
 
