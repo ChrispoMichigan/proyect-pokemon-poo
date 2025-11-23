@@ -35,7 +35,6 @@ class PokemonBase(ABC):
         evolucion: int = 1,
         atrapado: bool = False):
 
-
         self.nombre: str = nombre
         self.descripcion: str = descripcion
         self.ataque: int = max(0, int(ataque))
@@ -111,9 +110,8 @@ class Pokemon(PokemonBase):
         else:
             self.evoluciones_nombres = [self.nombre]
 
-
-        if 1 <= self.evolucion <= len(self.evoluciones_nombres):
-            self.nombre = self.evoluciones_nombres[self.evolucion - 1 ]
+        if self.nombre == "Sin Pokemon" and 1 <= self.evolucion <= len(self.evoluciones_nombres):
+            self.nombre = self.evoluciones_nombres[self.evolucion - 1]
 
     def detallesPokemon(self):
         Utils.print_title("DETALLES DEL POKEMON")
@@ -124,7 +122,7 @@ class Pokemon(PokemonBase):
         print(f"Vida           : {self.vida}")
         print(f"Nivel          : {self.nivel}")
         print(f"Evolucion      : {self.evolucion}")
-        print(f"Atrapado       : {self.atrapado}")
+        print(f"Atrapado   : {'Sí' if self.atrapado else 'No'}")
 
 
     def hablar(self):
@@ -161,50 +159,77 @@ class Pokemon(PokemonBase):
         self.ataque += self.BOOST_ATAQUE
         self.defensa += self.BOOST_DEFENSA
         self.vida += self.BOOST_VIDA
-        evoluciono = self.subir_nivel(0)
+        self.evoluciono = self.subir_nivel(0)
         print(f"Actualizacion completa: ataque, defensa y vida incrementados.")
 
 #subclases especializadas
 class Agua(Pokemon):
-    def __init__(self, *args, ataque_especial: str = "Hidrobomba", evoluciones_nombres: Optional[List[str]] = None, **kwargs):
-        super().__init__(*args, evoluciones_nombres=evoluciones_nombres or ["Wartortle", "Squirtle", "Blastoise"], **kwargs)
-        self.ataque_especial = ataque_especial
+    def __init__(self, nombre, descripcion, ataque, defensa, vida, nivel, ataque_especial="Hidrobomba", evoluciones_nombres=None):
 
+        super().__init__( nombre, descripcion, ataque, defensa, vida, nivel, evoluciones_nombres=evoluciones_nombres or ["Squirtle", "Wartortle", "Blastoise"]
+        )
+        self.ataque_especial = ataque_especial
 
     def actualizar(self):
         self.defensa += 10
         print(f"{self.nombre} (Agua) se refresca: +10 defensa.")
 
-
 class Fuego(Pokemon):
-    def __init__(self, *args, ataque_especial: str = "Lanzallamas", evoluciones_nombres: Optional[List[str]] = None, **kwargs):
-        super().__init__(*args, evoluciones_nombres = evoluciones_nombres or ["Charmander", "Charmeleon", "Charizard"], **kwargs)
+    def __init__(self, nombre, descripcion, ataque, defensa, vida, nivel, ataque_especial="Lanzallamas", evoluciones_nombres=None):
+
+        super().__init__(
+            nombre,
+            descripcion,
+            ataque,
+            defensa,
+            vida,
+            nivel,
+            evoluciones_nombres=evoluciones_nombres or ["Charmander", "Charmeleon", "Charizard"]
+        )
         self.ataque_especial = ataque_especial
 
     def actualizar(self):
         self.ataque += 10
-        print(f"{self.nombre} (Fuego) se enciende: +10 ataque.") 
+        print(f"{self.nombre} (Fuego) se enciende: +10 ataque.")
 
 
 class Electrico(Pokemon):
-    def __init__(self, *args, ataque_especial: str = "Impactrueno", evoluciones_nombres: Optional[List[str]] = None, **kwargs):
-        super().__init__(*args, evoluciones_nombres = evoluciones_nombres or ["Pichu", "Pikachu", "Raichu"], **kwargs)
+    def __init__(self, nombre, descripcion, ataque, defensa, vida, nivel, ataque_especial="Impactrueno", evoluciones_nombres=None):
+
+        super().__init__(
+            nombre,
+            descripcion,
+            ataque,
+            defensa,
+            vida,
+            nivel,
+            evoluciones_nombres=evoluciones_nombres or ["Pichu", "Pikachu", "Raichu"]
+        )
         self.ataque_especial = ataque_especial
 
     def actualizar(self):
         self.vida += 10
-        print(f"{self.nombre} (Electtrico) se carga: +10 vida.")
-
+        print(f"{self.nombre} (Electrico) se carga: +10 vida.")
 
 class Hierba(Pokemon):
-    def __init__(self, *args, ataque_especial: str = "Rayo Solar", evoluciones_nombres: Optional[List[str]] = None, **kwargs):
-        super().__init__(*args, evoluciones_nombres = evoluciones_nombres or ["Bulsabur", "Ivysaur", "Venusaur"], **kwargs)
+    def __init__(self, nombre, descripcion, ataque, defensa, vida, nivel, ataque_especial="Rayo Solar", evoluciones_nombres=None):
+
+        super().__init__(
+            nombre,
+            descripcion,
+            ataque,
+            defensa,
+            vida,
+            nivel,
+            evoluciones_nombres=evoluciones_nombres or ["Bulbasaur", "Ivysaur", "Venusaur"]
+        )
         self.ataque_especial = ataque_especial
 
     def actualizar(self):
         self.ataque += 5
         self.vida += 5
         print(f"{self.nombre} (Hierba) se nutre: +5 ataque, +5 vida.")
+
 
 #herencia multiple pokemonn con entrenamiento
 
@@ -314,31 +339,31 @@ class App:
                     self.mi_pokemon.detallesPokemon()
                 else:
                     print("No tienes Pokemon.")
-                    Utils.pause()
+                Utils.pause()
 
             elif op == 2:
                 if self.mi_pokemon:
                     self.mi_pokemon.hablar()
                 else:
                     print("No tienes Pokemon.")
-                    Utils.pause()
+                Utils.pause()
 
             elif op == 3:
                 if self.mi_pokemon:
                     self.menu_entrenamiento()
                 else:
                     print("No tienes Pokemon.")
-                    Utils.pause()
+                Utils.pause()
 
             elif op == 4:
                 if self.mi_pokemon:
                     self.menu_combatir()
                 else:
                     print("No tienes Pokemon.")
-                    Utils.pause()
+                Utils.pause()
 
             elif op == 5:
-                self.verPokemonsAtrapados()
+                self.VerPokemonsAtrapados()
 
             elif op == 6:
                 self.crear_pokemon_enemigo_manual()
@@ -466,7 +491,6 @@ class App:
         turno_jugador = True
 
         while (mi_vida > 0) and (en_vida > 0):
-            Utils.clear()
             Utils.print_title("COMBATE - ESTADO ")
             print("Tu Pokemon:  ")
             print(f"{self.mi_pokemon.nombre} | Ataque: {self.mi_pokemon.ataque} | Defensa:{mi_def} | Vida: {mi_vida}")
@@ -476,7 +500,7 @@ class App:
             print("-" * 40)
 
             if turno_jugador:
-                print("Tu tunro: elige una accion")
+                print("Tu turno: elige una accion")
                 print("1. Pasar turno")
                 print("2. Ataque normal")
                 print("3. Ataque especial")
@@ -490,14 +514,17 @@ class App:
 
                 if op == 1:
                     print("Pase el turno.")
+
                 elif op == 2:
                     en_def, en_vida = aplicar_daño(self.mi_pokemon.ataque, en_def, en_vida)
                     print(f"Hiciste un ataque normal con {self.mi_pokemon.ataque}.")
+
                 elif op == 3:
                     atk_val = int(self.mi_pokemon.ataque * 1.5)
                     en_def, en_vida = aplicar_daño(atk_val, en_def, en_vida)
                     special = getattr(self.mi_pokemon, "ataque_especial", "Ataque Especial")
                     print(f"{self.mi_pokemon.nombre} usa {special} ({atk_val} dmg).")
+
                 elif op == 4:
                     print("Huyes del combate.")
                     Utils.pause()
@@ -508,17 +535,21 @@ class App:
                     choice = random.choice([1, 2, 3])
                     if choice == 1:
                         print(f"{enemigo.nombre} pasa el turno.")
+
                     elif choice == 2:
                         mi_def, mi_vida = aplicar_daño(enemigo.ataque, mi_def, mi_vida)
                         print(f" {enemigo.nombre} te golpea con ataque normal ({enemigo.ataque}).")
+
                     elif choice == 3:
                         atk_val = int(enemigo.ataque * 1.5)
                         mi_def, mi_vida = aplicar_daño(atk_val, mi_def, mi_vida)
                         special = getattr(enemigo, "ataque_especial", "Atgaque Especial")
                         print(f"{enemigo.nombre} usa {special} ({atk_val} dmg).")
 
-                        Utils.pause()
                         turno_jugador = not turno_jugador
+                        Utils.pause()
+                        Utils.clear()
+
 
         Utils.clear()
         if en_vida <= 0:
@@ -549,7 +580,7 @@ class App:
         Utils.pause()
 
     def VerPokemonsAtrapados(self):
-        Utils.print_tittle("POKEMON ATRAPADOS")
+        Utils.print_title("POKEMON ATRAPADOS")
         if not self.pokemons_atrapados:
             print("No has atrapado pokemons aun. ")
         else:
@@ -562,10 +593,10 @@ class App:
         try:
             nombre = input("Nombre del enemigo: ").strip() or "Enemigo creado"
             desc = input("Descripcion:  ").strip() or "Enemigo"
-            ataque = int(input("Ataque(1-1000): "))
-            defensa = int(input("Defensa (1-1000):  "))
-            vida = int(input("Vida (1-1000):  "))
-            nivel = int(input("Nivel (1-100):  "))
+            ataque = int(input("Ataque(1-100): "))
+            defensa = int(input("Defensa (1-100):  "))
+            vida = int(input("Vida (1-100):  "))
+            nivel = int(input("Nivel (1-1000):  "))
         except ValueError:
             print("Entrada invalida - valores numericos requeridos.")
             Utils.pause()
@@ -594,6 +625,15 @@ if __name__ == "__main__":
         App()
     except KeyboardInterrupt:
         print("\nPrograma interrumpido por el usuario.  Hasta luego! ")
+
+
+
+
+
+
+
+
+
 
 
 
