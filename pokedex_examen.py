@@ -2,11 +2,12 @@ from __future__ import annotations
 import random 
 from abc import ABC, abstractmethod 
 from typing import List, Optional, Tuple
+import os 
+
 
 class Utils:
     @staticmethod 
     def clear():
-        import os 
         os.system("cls" if os.name == "nt" else "clear")
 
     @staticmethod
@@ -63,7 +64,8 @@ class PokemonBase(ABC):
         if self.nivel >= 100:
             if self.evolucion < 3:
                 self.evolucion += 1
-                self.nivel = 0
+                if reiniciar_on_evol:
+                    self.nivel = 0
                 return True 
             else:
                 self.nivel = 0
@@ -92,8 +94,8 @@ class Pokemon(PokemonBase):
     BOOST_VIDA = 20
 
     def __init__(self,
-        nombre: str = "Sin Pokémon",
-        descripcion: str = "No descripción",
+        nombre: str = "Sin Pokemon",
+        descripcion: str = "No descripcion",
         ataque: int = 0,
         defensa: int = 0,
         vida: int = 0,
@@ -134,11 +136,10 @@ class Pokemon(PokemonBase):
         self.vida += 10
         evoluciono = self.subir_nivel(10)
         if evoluciono:
-            old = self.nombre
             # actualizar nombre si existe en lista
             idx = min(self.evolucion - 1, len(self.evoluciones_nombres) - 1)
             self.nombre = self.evoluciones_nombres[idx]
-            print(f"¡El Pokémon ha evolucionado! Ahora es: {self.nombre}")
+            print(f"¡El Pokemon ha evolucionado! Ahora es: {self.nombre}")
         else:
             print("Entrenamiento aplicado.")
 
@@ -163,11 +164,10 @@ class Pokemon(PokemonBase):
         print(f"Actualizacion completa: ataque, defensa y vida incrementados.")
 
 #subclases especializadas
+
 class Agua(Pokemon):
     def __init__(self, nombre, descripcion, ataque, defensa, vida, nivel, ataque_especial="Hidrobomba", evoluciones_nombres=None):
-
-        super().__init__( nombre, descripcion, ataque, defensa, vida, nivel, evoluciones_nombres=evoluciones_nombres or ["Squirtle", "Wartortle", "Blastoise"]
-        )
+        super().__init__( nombre, descripcion, ataque, defensa, vida, nivel, evoluciones_nombres=evoluciones_nombres or ["Squirtle", "Wartortle", "Blastoise"])
         self.ataque_especial = ataque_especial
 
     def actualizar(self):
@@ -176,16 +176,7 @@ class Agua(Pokemon):
 
 class Fuego(Pokemon):
     def __init__(self, nombre, descripcion, ataque, defensa, vida, nivel, ataque_especial="Lanzallamas", evoluciones_nombres=None):
-
-        super().__init__(
-            nombre,
-            descripcion,
-            ataque,
-            defensa,
-            vida,
-            nivel,
-            evoluciones_nombres=evoluciones_nombres or ["Charmander", "Charmeleon", "Charizard"]
-        )
+        super().__init__(nombre, descripcion, ataque, defensa, vida, nivel, evoluciones_nombres=evoluciones_nombres or ["Charmander", "Charmeleon", "Charizard"])
         self.ataque_especial = ataque_especial
 
     def actualizar(self):
@@ -235,8 +226,10 @@ class Hierba(Pokemon):
 
 class PokemonConEntrenamiento(Pokemon, Entrenamiento):
     def subirAtaque(self):
-        self.subirAtaque_base() if hasattr(self, "subirAtaque_base") else None
         Pokemon.subirAtaque(self)
+
+    def subirDefensa(self):
+        Pokemon.subirDefensa(self)
 
     def subirVida(self):
         Pokemon.subirVida(self)
@@ -269,6 +262,8 @@ class App:
         self.bienvenida()
         self.main_loop()
 
+
+
     def bienvenida(self):
         Utils.print_title("Bienvenido a la POKEDEX")
         nombre = input("Ingresa tu nombre: ").strip()
@@ -283,8 +278,8 @@ class App:
         opciones = [
             ("Agua", Agua("Squirtle", "Pokemon tortuga", ataque=20, defensa=30, vida=100, nivel=1, evoluciones_nombres=["Squirtle", "Wartortle", "Blastoise"])),
             ("Fuego", Fuego("Charmander", "Pokemon de fuego", ataque=25, defensa=20, vida=90, nivel=1, evoluciones_nombres=["Charmander", "Charmeleon", "Charizard"])),
-            ("Eléctrico", Electrico("Pichu", "Poemon eléctrico", ataque=18, defensa=18, vida=80, nivel=1, evoluciones_nombres=["Pichu", "Pikachu", "Raichu"])),
-            ("Hierba", Hierba("Bulbasaur", "Pokémon planta", ataque=22, defensa=22, vida=95, nivel=1, evoluciones_nombres=["Bulbasaur", "Ivysaur", "Venusaur"]))
+            ("Electrico", Electrico("Pichu", "Poemon electrico", ataque=18, defensa=18, vida=80, nivel=1, evoluciones_nombres=["Pichu", "Pikachu", "Raichu"])),
+            ("Hierba", Hierba("Bulbasaur", "Pokemon planta", ataque=22, defensa=22, vida=95, nivel=1, evoluciones_nombres=["Bulbasaur", "Ivysaur", "Venusaur"]))
         ]
         for idx, (tipo, poke) in enumerate(opciones, start = 1):
             print(f"{idx}. {tipo} - {poke.nombre} - Ataque {poke.ataque} | Defensa {poke.defensa} | Vida {poke.vida}")
@@ -625,6 +620,19 @@ if __name__ == "__main__":
         App()
     except KeyboardInterrupt:
         print("\nPrograma interrumpido por el usuario.  Hasta luego! ")
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
